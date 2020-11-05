@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  proxy:
+    container_name: nginx-proxy
+    volumes:
+      - config-certs:/etc/nginx/certs/
+      - config-vhost:/etc/nginx/vhost.d/
+      - www-data:/usr/share/nginx/html/
+    ports:
+      - 443:443/tcp
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: nginx-proxy-letsencrypt
+    environment:
+      DEFAULT_EMAIL: $DEFAULT_EMAIL
+      NGINX_PROXY_CONTAINER: nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - config-certs:/etc/nginx/certs/
+      - config-vhost:/etc/nginx/vhost.d/
+      - www-data:/usr/share/nginx/html/
+
+volumes:
+  config-certs:
+  config-vhost:
+  www-data:
