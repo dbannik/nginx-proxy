@@ -13,6 +13,7 @@ services:
   letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: nginx-proxy-letsencrypt
+    restart: unless-stopped
     environment:
       DEFAULT_EMAIL: $DEFAULT_EMAIL
       NGINX_PROXY_CONTAINER: nginx-proxy

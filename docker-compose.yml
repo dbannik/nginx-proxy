@@ -3,6 +3,7 @@ version: "3"
 services:
   proxy:
     image: jwilder/nginx-proxy:alpine
+    restart: unless-stopped
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     ports:
