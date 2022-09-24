@@ -10,6 +10,4 @@ services:
       - 80:80/tcp
 
 networks:
-  default:
-    external:
-      name: nginx-proxy
+  nginx-proxy:
